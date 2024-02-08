@@ -1,0 +1,45 @@
+<div class="modal-backdrop">
+    <div class="modal">
+        <header class="modal-header">
+            <slot name="header">
+            all camps are required!
+            </slot>
+        </header>
+        <section class="modal-body">
+        <slot name="body">
+            <span class="p-input-icon-right">
+                
+                <mat-form-field class="example-form-field">
+                    <mat-label *ngIf="!login.identification">enter your identification</mat-label>
+                    <input matInput type="text" [(ngModel)]="login.identification">
+                    @if (login) {
+                      <button matSuffix mat-icon-button aria-label="Clear" (click)="login.identification=''">
+                        <mat-icon *ngIf="login.identification">close</mat-icon>
+                      </button>
+                    }
+                  </mat-form-field>
+            </span><br>
+            <span class="p-input-icon-left">
+                <mat-form-field class="example-form-field">
+                    <mat-label *ngIf="!login.password">enter your password</mat-label>
+                    <input matInput type="text" [(ngModel)]="login.password">
+                    @if (login) {
+                      <button matSuffix mat-icon-button aria-label="Clear" (click)="login.password=''">
+                        <mat-icon *ngIf="login.password">close</mat-icon>
+                      </button>
+                    }
+                  </mat-form-field>
+            </span>
+        </slot><br>
+        </section>
+        <footer class="modal-footer">
+            <div class="example-button-row">
+                <button mat-flat-button color="primary" (click)="handleClick()">
+                    Sign In
+                    <mat-icon [style]="rotate">{{icon}}</mat-icon>
+                </button>
+            </div>
+                  
+        </footer>
+    </div>
+</div> 
