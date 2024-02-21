@@ -2,5 +2,11 @@
     <app-logo/>
 </section>
 <section>
-    <app-login-employee/>
+    <app-login-employee 
+        [login]="loginUser" 
+        (sendEvent)="handledClick($event)"
+        [matIcons]="matIcons"
+        [icon]="icon"
+        [btnColor]="btnColor"
+        [btnColor_color]="btnColor_color"/>
 </section>

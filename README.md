@@ -28,3 +28,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Install Angular Material
 ng add @angular/material
+
+## Install PrimeNG
+npm install primeng
+
+## Install primeicons
+npm install primeicons
+
+## Install Bootstrap
+npm install bootstrap jquery @popperjs/core

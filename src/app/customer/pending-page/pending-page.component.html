@@ -1,0 +1,12 @@
+<header>
+    <app-logo/>
+</header><br>
+<section>
+    <app-filter-layout 
+    (sendactiveGrid)="getActiveGrid($event)"
+    (sendactiveList)="getActiveList($event)"
+    (onChanged)="onChanged($event)"
+    [currentPage]="currentPage"/>
+</section>
+<app-form-data  *ngFor="let customer of filterData()" [formData]="customer"
+layout="{{layout}}" (sendHandleClick)="onClicked($event)" [status]="status"/>

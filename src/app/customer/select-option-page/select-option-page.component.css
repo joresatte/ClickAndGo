@@ -1,0 +1,40 @@
+.card{
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5em;
+
+}
+.mat-card{
+    border: solid 5px;
+    border-color: rgb(255, 0, 85);
+    background-color: rgb(32, 53, 240);
+}
+.mat-card:hover{
+    border: solid 5px;
+    border-color: rgb(255, 0, 85);
+    background-color: rgb(32, 53, 240);
+}
+@media (hover: hover) {
+    .mat-card:hover{
+        border: solid 5px;
+        border-color: rgb(32, 53, 240);
+        background-color: rgb(255, 0, 85);
+    }
+  }
+
+  @media only screen and (max-width: 320px){
+    .mat-card:hover{
+        border: solid 5px;
+        border-color: rgb(32, 53, 240);
+        background-color: rgb(255, 0, 85);
+    }
+}
+
+.note{
+    font-family: cursive;
+    font-style: oblique;
+}
+span{
+    font-size: 1.5em;
+}

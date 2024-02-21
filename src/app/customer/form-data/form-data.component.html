@@ -1,0 +1,18 @@
+<div class="list">
+    <mat-card class="example-card">            
+        <span><img [src]="formData.picture" alt=""></span>
+        <mat-card-content>
+            <mat-card-title>{{formData.cliente}}</mat-card-title>
+            <mat-card-subtitle>{{formData.dni}}</mat-card-subtitle>
+            <mat-card-subtitle>{{formData.phone}}</mat-card-subtitle>
+            <mat-card-subtitle [class]="class">{{formData.status}}</mat-card-subtitle>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button class="btn-consultar" (click)="handleClick()">Consultar <mat-icon>visibility</mat-icon>
+            </button>
+
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+

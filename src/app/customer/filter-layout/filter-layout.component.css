@@ -1,0 +1,22 @@
+.btn-wrapper{
+    display: flex;
+    justify-content: space-between
+  }
+  button{
+    height: 3.9em;
+  }
+  .listBtnClass{
+    border-bottom: solid 5px rgb(243, 5, 64);
+  }
+  .gribtnClass{
+    border-bottom: solid 5px rgb(243, 5, 64);
+  }
+  section{
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+  }
+  mat-form-field{
+    margin-top: 8px;
+    width: 12em;
+  }

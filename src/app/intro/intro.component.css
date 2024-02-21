@@ -13,7 +13,7 @@ transition: transform 3s ease;
 }
 
 body {
-background-image: linear-gradient(#1900ff, #f236dc, #ffeb3b);
+/* background-image: linear-gradient(#1900ff, #f236dc, #ffeb3b); */
 width: 100vw;
 height: 100vh;
 overflow: hidden;
@@ -50,7 +50,7 @@ margin-top: 25%;
 .container {
 width: 99%;
 height: 99%;
-background-color: rgba(0, 153, 224, 0.507);
+/* background-color: rgba(0, 153, 224, 0.507); */
 position: relative;
 animation: bgChange 5s linear, bgScale 6s linear;
 }
@@ -145,13 +145,7 @@ position: relative;
 margin-top: 70%;
 }
 
-.container {
-width: 99%;
-height: 99%;
-background-color: rgba(0, 153, 224, 0.507);
-position: relative;
-animation: bgChange 5s linear, bgScale 6s linear;
-}
+
 
 .container::before {
 content: "";
@@ -215,7 +209,7 @@ z-index: 5;
 }
 }
 
-@keyframes bgChange {
+/* @keyframes bgChange {
 0% {
   background-color: rgb(235, 235, 235);
 }
@@ -228,7 +222,7 @@ z-index: 5;
 100% {
   background-color: rgb(10, 10, 10);
 }
-}
+} */
 
 @keyframes bgScale {
 0% {
@@ -326,6 +320,7 @@ span {
   display: flex;
   justify-self: end;
   margin-left: 60%;
+  margin-top: 10%;
   animation-duration: 3s;
   animation-delay: 1s;
   animation-name: slidein;

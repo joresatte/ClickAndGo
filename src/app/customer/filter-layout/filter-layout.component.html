@@ -1,0 +1,22 @@
+<nav>
+    <section>
+        <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input type="text" matInput placeholder="filter" [(ngModel)]="inputText" (ngModelChange)="cambiaLado($event)">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        <mat-list role="list" class="btn-wrapper">
+            <button [class]="listBtnClass" mat-raised-button (click)="getBack()">
+                <mat-icon><span data-bs-toggle="tooltip" title="Retroceder!"></span> keyboard_backspace</mat-icon>
+              </button><br>
+              <button [class]="gribtnClass" mat-raised-button [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+              </button>
+        </mat-list>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="getBack()">Retroceder</button>
+          <button mat-menu-item (click)="reloadPage()">Update Page</button>
+          <button mat-menu-item (click)="toPage()">{{otherPage}}</button>
+        </mat-menu>
+    </section>
+</nav>
