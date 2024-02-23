@@ -74,10 +74,9 @@ export class PendingPageComponent implements OnInit{
       });
      }
   }
-  onClicked(e:string){
-    console.log(e)
+  onClicked(e:any){
     if(e){
-      this.router.navigateByUrl('/detailPage')
+      this.router.navigate(['/detailPage', e])
     }
   }
   

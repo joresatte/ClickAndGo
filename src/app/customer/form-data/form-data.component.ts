@@ -31,9 +31,9 @@ export class FormDataComponent implements OnInit{
   @Input()
   layout!:string;
   @Output()
-  sendHandleClick= new EventEmitter<string>()
-  handleClick() {
-    this.sendHandleClick.emit('onClicked')
+  sendHandleClick= new EventEmitter<any>()
+  handleClick(e:any) {
+    this.sendHandleClick.emit(e)
   }
   onSortChange(){
     console.log('text changed')

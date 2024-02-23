@@ -71,10 +71,9 @@ export class DeliveredPageComponent implements OnInit{
       });
      }
   }
-  onClicked(e:string){
-    console.log(e)
+  onClicked(e:any){
     if(e){
-      this.router.navigateByUrl('/detailPage')
+      this.router.navigate(['/detailPage', e])
     }
   }
   filterBy(val:string, obj:CustomerData[]) {

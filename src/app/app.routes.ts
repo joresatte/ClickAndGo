@@ -36,7 +36,7 @@ export const routes: Routes = [
         component: DeliveredPageComponent
     },
     {
-        path: 'detailPage',
+        path: 'detailPage/:id',
         component: DetailPageComponent
     },
     { 

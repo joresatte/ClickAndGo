@@ -13,5 +13,8 @@ export class AppService {
   getMethod(url:string, httpOptions:any){
     return this.http.get(url, httpOptions)
   }
+  updateMethod(url:string, data: any, httpOptions:any) {
+    return this.http.post(url, data, httpOptions)
+  }
 }
 
