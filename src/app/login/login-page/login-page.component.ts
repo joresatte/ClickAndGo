@@ -31,6 +31,7 @@ export class LoginPageComponent implements OnInit {
     this.btnColor_color= 'primary'
   }
   options={
+    method: "POST",
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
   data?:any;

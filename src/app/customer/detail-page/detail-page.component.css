@@ -159,4 +159,8 @@ input::placeholder{
         height: 3em;
     }
 }
-  
+.red-snackbar{
+    color:white;
+}
+
+

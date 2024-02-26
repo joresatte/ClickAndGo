@@ -14,6 +14,8 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { HttpHeaders } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-detail-page',
@@ -45,8 +47,8 @@ export class DetailPageComponent implements OnInit{
   icon:string='send'//error
   btn_btn:any='btn_btn'
   btn_color:string= 'primary'
-  constructor(private serv: AppService){
-    this.id= String(this.route.snapshot.params['id'])
+  constructor(private serv: AppService, private snackBar: MatSnackBar){
+    this.id= this.route.snapshot.params['id']
   }
   ngOnInit(): void {
     this.getCustomerData()
@@ -57,8 +59,9 @@ export class DetailPageComponent implements OnInit{
       const options:any={}
       this.serv.getMethod(url, options).subscribe((res:any)=>{
         this.customerData= res
+        // console.log(JSON.stringify(this.customerData))
         this.customerStatus= this.customerData['status']
-        console.log(this.customerStatus)
+        //console.log(this.customerStatus)
         if(this.customerStatus== 'Entregado'){
           this.isEnabled= true
           this.disabledBtnSubmit= true
@@ -69,9 +72,17 @@ export class DetailPageComponent implements OnInit{
       console.log(error)
     }
   }
+  openSnackBar(message: string, action:string, duration: number) {
+    this.snackBar.open(message, action, {
+      duration: duration,
+      verticalPosition: 'bottom', // 'top' | 'bottom'
+      horizontalPosition: 'end', //'start' | 'center' | 'end' | 'left' | 'right'
+      panelClass: ['red-snackbar'],
+    });
+  }
   submitData(data:CustomerData){
-    console.log(data)
     const options={
+      method: "PUT",
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
     const url= `${Constant.login_Path}/customer_data/update/${this.id}`
@@ -80,11 +91,28 @@ export class DetailPageComponent implements OnInit{
       alert('error')
     }else{
       // console.log(body)
-      this.serv.updateMethod(url, data, options).subscribe((res:any)=>{
-        if(res.status== 200){
+      const body=JSON.stringify({
+        id:data.id,
+        picture: data.picture,
+        cliente:data.cliente,
+        dni:data.dni,
+        address:data.address,
+        phone:data.phone,
+        status: 'Entregado',
+        delivery_note:data.delivery_note,
+        order_data: data.order_data,
+        orders_packages:data.orders_packages,
+        receptor_data:data.receptor_data,
+        returned_product: data.returned_product
+      })
+      console.log(body)
+      this.serv.updateMethod(url, body, options).subscribe(async(res:any)=>{
+        console.log('res',res)
+        if(await res.status== 200){
           setTimeout(()=>{
-            this.disabledBtnSubmit= true
           }, 3000)
+          window.location.reload()
+          this.disabledBtnSubmit= true
           return this.updateResponse = 'Saved'
         }else{
           this.icon= 'error'

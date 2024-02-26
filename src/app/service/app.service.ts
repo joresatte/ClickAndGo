@@ -14,7 +14,7 @@ export class AppService {
     return this.http.get(url, httpOptions)
   }
   updateMethod(url:string, data: any, httpOptions:any) {
-    return this.http.post(url, data, httpOptions)
+    return this.http.put(url, data, httpOptions)
   }
 }
 
