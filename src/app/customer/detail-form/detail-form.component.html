@@ -1,0 +1,122 @@
+
+<br>
+<div class="container">
+    <div class="contain">
+        <h1><b style="font-size: larger;">Datos cliente</b></h1>
+        <div class="customer">
+            <h4><b style="color: blue;">Cliente:</b> <br> <span>{{ customerData!.cliente }}</span></h4>
+            <h4><b style="color: blue;">DNI:</b> <br> <span>{{ customerData!.dni }}</span></h4>
+            <h4><b style="color: blue;">Direccion:</b> <br> <span>{{ customerData!.address }}</span></h4> 
+            <h4><b style="color: blue;">Telefono:</b> <br><span>{{ customerData!.phone }}</span></h4> 
+            <h4><b style="color: blue;">Estado pedido:</b> <br><span>{{ customerData!.status }}</span></h4> 
+        </div>
+    </div>
+    <br>
+    <div class="contain">
+        <h1 ><b style="font-size: larger;">Datos pedido</b></h1>
+        <div class="customer">
+            <h4><b style="color: blue;">Fecha de entrega</b>: <br><span>{{ customerData.order_data[0].delivery_date }}</span></h4> 
+            <h4><b style="color: blue;">Numero de pedido:</b> <br><span>{{ customerData.order_data[0].order_number}}</span></h4> 
+            <h4><b style="color: blue;">Hora limite:</b> <br><span>{{ customerData.order_data[0].delivery_time }}</span></h4> 
+            <h4><b style="color: blue;">Franja Horaria:</b> <br><span>{{ customerData.order_data[0].delivery_time_interval }}</span></h4> 
+        </div>
+    </div>
+    <br>
+    <div class="contain">
+        <h1 ><b style="font-size: larger;">Bultos pedido</b></h1>
+        <div class="customer"> 
+            <mat-card class="first-card">
+                <mat-card-header>
+                  <mat-card-title>Cajones</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <mat-card-subtitle class="Cajones">Frio
+                        <br><br>
+                        <span class="cls-span">{{customerData.orders_packages[0].drawers[0].cold}}</span>
+                    </mat-card-subtitle><br>
+                    <mat-card-subtitle class="Cajones">Congelado
+                        <br><br>
+                        <span class="cls-con">{{customerData.orders_packages[0].drawers[0].frozen}}</span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="Cajones">Seco
+                        <br><br>
+                        <span class="cls-sec">{{customerData.orders_packages[0].drawers[0].dry}}</span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="Cajones">
+                        Fuera
+                        <br><br>
+                        <mat-label class="cls-fue">{{customerData.orders_packages[0].drawers[0].out_of_drawers}}</mat-label>
+                    </mat-card-subtitle>
+                </mat-card-actions>
+            </mat-card>
+            <mat-card class="first-card">
+                <mat-card-header>
+                  <mat-card-title>Bolsas</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <mat-card-subtitle class="Bolsas">Frio
+                        <br><br>
+                        <span class="cls-span">{{customerData.orders_packages[0].bags[0].cold}}</span>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="Bolsas">Congelado
+                        <br><br>
+                        <span class="cls-con">{{customerData.orders_packages[0].bags[0].frozen}}</span>
+                    </mat-card-subtitle>
+                </mat-card-actions>
+            </mat-card>
+            <mat-card class="first-card">
+                <mat-card-header>
+                  <mat-card-title>Sustituciones</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions>
+                    <mat-card-subtitle class="Sustituciones"><h3>{{customerData.orders_packages[0].substitutions}}</h3></mat-card-subtitle>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <br>
+    <div class="input-disabled">
+        <mat-form-field>
+            <mat-label>Notas para reparto:</mat-label>
+            <textarea matInput [disabled]="disabled" class="disabled">{{customerData.delivery_note[0].note}}</textarea>
+          </mat-form-field>
+    </div>
+    <div class="textarea">
+        <textarea name="textarea" 
+                [disabled]="isEnabled"
+                placeholder="apunta aqui los productos devueltos y el o los motivo(s) de la devolucion" id="" cols="" rows="5" style="width: 100%;"
+                [(ngModel)]="customerData.returned_product[0].return_reason">{{customerData.returned_product[0].return_reason}}</textarea>
+    </div>
+    <br>
+    <p>unidad de producto devueltos</p><br>
+    <div class="input-area">
+        <input type="number" name="input" [disabled]="isEnabled"
+                id="unity" style="width: 96%; height: 3em;" [(ngModel)]="customerData.returned_product[0].unity">
+        <button mat-icon-button matTooltip="Primary" (click)="customerData.returned_product[0].unity = customerData.returned_product[0].unity + 1" color="primary" aria-label="Example icon-button with a heart icon" [disabled]='disabledBtnSubmit'>
+        <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <br>
+    <div class="input-element">
+        <input type="text" name="input" 
+                id="inputDni" style="width: 50%; height: 3em;"  
+                placeholder="DNI del receptor" [(ngModel)]="customerData.receptor_data[0].DNI"
+                class="receptor" [disabled]="isEnabled"><br>
+        <input type="text" name="input" 
+                id="inputName" style="width: 50%; height: 3em;" 
+                [disabled]="isEnabled"
+                placeholder="Nombre del receptor" [(ngModel)]="customerData.receptor_data[0].name"
+                class="receptor" >
+    </div>
+    <br>
+    <br>
+    <footer class="btn-footer" *ngIf="showFooter">
+        <button mat-raised-button id="btn-submit" 
+            [class]="btn_btn" 
+            extended [color]="btn_color" 
+            [disabled]='disabledBtnSubmit' (click)="submitData(customerData)">
+            <mat-icon>{{icon}}</mat-icon>
+            {{submit}}
+        </button>
+    </footer>
+</div>
