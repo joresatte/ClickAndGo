@@ -15,7 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { HttpHeaders } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { FormDataComponent } from '../form-data/form-data.component';
 
 @Component({
   selector: 'app-detail-page',
@@ -23,18 +23,59 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   imports: [AppLogoComponent, CommonModule, 
             FormsModule, MatCardModule, MatButtonModule, 
             MatFormFieldModule, MatInputModule,
-            MatTooltipModule, MatIconModule],
+            MatTooltipModule, MatIconModule, FormDataComponent],
   templateUrl: './detail-page.component.html',
   styleUrl: './detail-page.component.css'
 })
 export class DetailPageComponent implements OnInit{
+  pageName:string= 'detailPage'
   route: ActivatedRoute = inject(ActivatedRoute);
   id:any
   load:string= 'Loading...'
   showLoad:boolean=false
-  customerData!:CustomerData
+  showDetailForm:boolean= false;
+  customerData: CustomerData={
+    id: 0,
+    picture: '',
+    cliente: '',
+    dni: '',
+    address: '',
+    phone: '',
+    status: '',
+    delivery_note: [{
+      id:0,
+      note:'',
+      customer_id:0
+    }],
+    order_data: [{
+      id:0,
+      delivery_date:'',
+      delivery_time:'',
+      order_number:0,
+      delivery_time_interval:'' ,
+      customer_id: 0,
+    }],
+    orders_packages: [{
+      id:0,
+      substitutions: '',
+      customer_id:0, 
+      drawers:[{cold:0, frozen:0, dry:0, out_of_drawers:0}],
+      bags:[{cold:0, frozen:0}],
+    }],
+    receptor_data: [{
+      id:0,
+      name:'',
+      DNI:'',
+      customer_id:0,
+    }],
+    returned_product: [{
+      id:0,
+      unity:0,
+      return_reason:'',
+      order_number:0,
+      customer_id:0,}]
+  }
   navTitle:string= 'Comprobante de la entrega'
-  customer!:CustomerData
   inputType!: string;
   addNumber:number=0
   disabled: BooleanInput= true;
@@ -47,30 +88,39 @@ export class DetailPageComponent implements OnInit{
   icon:string='send'//error
   btn_btn:any='btn_btn'
   btn_color:string= 'primary'
-  constructor(private serv: AppService, private snackBar: MatSnackBar){
+  serv: AppService = inject(AppService);
+  constructor(private snackBar: MatSnackBar){
+    // const options:any={}
     this.id= this.route.snapshot.params['id']
+    // const url:string= `${Constant.login_Path}/one_customer/${this.id}`
+    // this.serv.getdataById(url, options).then(data =>{
+    //   this.customerData= data!
+    //   this.customerStatus= data?.status
+    //   if(this.customerStatus == 'Entregado'){
+    //     this.isEnabled= true
+    //     this.disabledBtnSubmit= true
+    //     this.showFooter= false
+    //   }
+    // })
   }
   ngOnInit(): void {
-    this.getCustomerData()
+    this.pageName=='detailPage'? this.showDetailForm= true: this.showDetailForm= false
+    this.getCustomerData()!
   }
   getCustomerData(){
-    try {
-      const url:string= `${Constant.login_Path}/one_customer/${this.id}`
-      const options:any={}
-      this.serv.getMethod(url, options).subscribe((res:any)=>{
-        this.customerData= res
-        // console.log(JSON.stringify(this.customerData))
-        this.customerStatus= this.customerData['status']
-        //console.log(this.customerStatus)
-        if(this.customerStatus== 'Entregado'){
+    const url:string= `${Constant.login_Path}/one_customer/${this.id}`
+    const options:any={}
+    this.serv.getdataById(url, options).then(data =>{
+      if(data!= undefined){
+         this.customerData= data
+        if(data.status == 'Entregado'){
           this.isEnabled= true
           this.disabledBtnSubmit= true
           this.showFooter= false
         }
-      })
-    } catch (error) {
-      console.log(error)
-    }
+      }
+    })
+    
   }
   openSnackBar(message: string, action:string, duration: number) {
     this.snackBar.open(message, action, {
@@ -98,7 +148,7 @@ export class DetailPageComponent implements OnInit{
         dni:data.dni,
         address:data.address,
         phone:data.phone,
-        status: 'Entregado',
+        status: data.status,
         delivery_note:data.delivery_note,
         order_data: data.order_data,
         orders_packages:data.orders_packages,
@@ -144,5 +194,4 @@ export class DetailPageComponent implements OnInit{
       return false
     }
   }
-  
 }

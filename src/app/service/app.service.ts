@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CustomerData } from '../customer-data';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,11 @@ export class AppService {
   }
   updateMethod(url:string, data: any, httpOptions:any) {
     return this.http.put(url, data, httpOptions)
+  }
+  async getdataById(url:string, httpOptions:any): Promise<CustomerData> {
+    const json = await fetch(url, httpOptions);
+    const res = await json.json() ?? {};
+    return res
   }
 }
 
