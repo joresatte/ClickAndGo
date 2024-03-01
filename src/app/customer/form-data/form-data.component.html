@@ -78,14 +78,19 @@
     <div class="input-disabled">
         <mat-form-field>
             <mat-label>Notas para reparto:</mat-label>
-            <textarea matInput [disabled]="disabled" class="disabled">{{formData.delivery_note[0].note}}</textarea>
+            <textarea matInput [disabled]="disabled" 
+                class="disabled">
+                {{formData.delivery_note[0].note}}
+            </textarea>
           </mat-form-field>
     </div>
     <div class="textarea">
         <textarea name="textarea" 
+                placeholder="apunta aqui los productos devueltos y el o los motivo(s) de la devolucion" 
                 [disabled]="isEnabled"
-                placeholder="apunta aqui los productos devueltos y el o los motivo(s) de la devolucion" id="" cols="" rows="5" style="width: 100%;"
-                [(ngModel)]="formData.returned_product[0].return_reason">{{formData.returned_product[0].return_reason}}</textarea>
+                id="" cols="" rows="7" style="width: 100%;"
+                [(ngModel)]="formData.returned_product[0].return_reason"><br><br>
+                {{formData.returned_product[0].return_reason}}</textarea>
     </div>
     <br>
     <p>unidad de producto devueltos</p>

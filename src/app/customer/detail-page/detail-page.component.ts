@@ -130,11 +130,12 @@ export class DetailPageComponent implements OnInit{
       panelClass: ['red-snackbar'],
     });
   }
-  submitData(data:CustomerData){
-    const options={
-      method: "PUT",
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
+  async submitData(data:CustomerData){
+    // const options={
+    //   method: "PUT",
+    //   headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    //   observe: 'response',
+    // }
     const url= `${Constant.login_Path}/customer_data/update/${this.id}`
     const check= this.isValidData(data)
     if(check==false){
@@ -156,24 +157,46 @@ export class DetailPageComponent implements OnInit{
         returned_product: data.returned_product
       })
       console.log(body)
-      this.serv.updateMethod(url, body, options).subscribe(async(res:any)=>{
-        console.log('res',res)
-        if(await res.status== 200){
-          setTimeout(()=>{
-          }, 3000)
-          window.location.reload()
-          this.disabledBtnSubmit= true
-          return this.updateResponse = 'Saved'
-        }else{
-          this.icon= 'error'
-          this.btn_color= 'warn'
-          setTimeout(()=>{
-            this.icon= 'send'
-            this.btn_color= 'primary'
-          }, 3000)
-          return this.updateResponse
+      this.serv.updateMethod(url, body).subscribe(
+        resp => {
+          const keys = resp.headers.keys();
+          console.log(resp.status, keys);
+          const resStatus = resp.status;
+          if (resStatus== 200) {
+            const action= 'Cancel'
+            const duration= 3000
+            const message= 'Saved successfully'
+            setTimeout(() => {
+              this.snackBar.open(message, action, {
+                duration: duration,
+                verticalPosition: 'bottom', // 'top' | 'bottom'
+                horizontalPosition: 'end', //'start' | 'center' | 'end' | 'left' | 'right'
+                panelClass: ['red-snackbar'],
+              });
+            }, 3000);
+            window.location.reload();
+            this.disabledBtnSubmit = true;
+            return this.updateResponse = 'Saved';
+          } else {
+            const action= 'Cancel'
+            const duration= 3000
+            const message= 'Fail to save data'
+            this.snackBar.open(message, action, {
+              duration: duration,
+              verticalPosition: 'bottom', // 'top' | 'bottom'
+              horizontalPosition: 'end', //'start' | 'center' | 'end' | 'left' | 'right'
+              panelClass: ['red-snackbar'],
+            });
+            this.icon = 'error';
+            this.btn_color = 'warn';
+            setTimeout(() => {
+              this.icon = 'send';
+              this.btn_color = 'primary';
+            }, 3000);
+            return this.updateResponse;
+          }
         }
-      })
+      )
     }
   }
   isValidData(data:any){
