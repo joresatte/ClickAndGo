@@ -1,0 +1,14 @@
+[
+    {"id":1,
+      "drawers":{"cold":2, "frozen":3, "dry":5, "out of drawers": 0},
+      "bags":{"cold":2, "frozen":1},
+      "substitutions": "No",
+      "customer_id":""
+    },
+    {"id":3,
+     "drawers":{"cold":2, "frozen":3, "dry":5, "out of drawers": 0},
+     "bags":{"cold":2, "frozen":1},
+      "substitutions": "No",
+      "customer_id":"" 
+    }
+]

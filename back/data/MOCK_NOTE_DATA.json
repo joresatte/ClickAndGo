@@ -1,0 +1,19 @@
+[
+    {"id":1,
+    "note":"Construction Expeditor",
+    "customer_id":"79-8171423"
+    },
+    {"id":2,
+    "note":"Architect",
+    "customer_id":
+    "09-7649260"
+    },
+    {"id":3,
+    "note":"Construction Manager",
+    "customer_id":"80-5422696"
+    },
+    {"id":4,
+    "note":"Construction Foreman",
+    "customer_id":"15-2621473"
+    }
+]

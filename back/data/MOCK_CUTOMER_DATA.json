@@ -1,0 +1,24 @@
+[
+    {"id":1,
+    "cliente":"Darn Chambers",
+    "dni":"0268-0131",
+    "address":"4752 Hoffman Drive",
+    "phone":"394 937 1775",
+    "delivery_note": "",
+    "order_data": "",
+    "orders_packages": "",
+    "receptor_data": "",
+    "returned_product": ""
+    },
+    {"id":2,
+    "cliente":"Townsend Moakson",
+    "dni":"49999-608",
+    "address":"9 Victoria Junction",
+    "phone":"436 246 3857",
+    "delivery_note": "",
+    "order_data": "",
+    "orders_packages": "",
+    "receptor_data": "",
+    "returned_product": ""
+    }
+]

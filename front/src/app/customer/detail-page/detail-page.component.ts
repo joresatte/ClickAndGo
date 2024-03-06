@@ -13,7 +13,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { BooleanInput } from '@angular/cdk/coercion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { HttpHeaders } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormDataComponent } from '../form-data/form-data.component';
 
